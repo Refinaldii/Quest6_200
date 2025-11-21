@@ -7,4 +7,5 @@
     <string name="alamat">ALAMAT</string>
     <string name="tampil">Tampilan Data</string>
     <string name="home">Form Isian</string>
+    <string name="Submit">Submit</string>
 </resources>
