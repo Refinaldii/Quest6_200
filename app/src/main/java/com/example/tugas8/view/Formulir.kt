@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.material3.Button
 import androidx.compose.material3.DividerDefaults.Thickness
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -32,6 +33,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
+import androidx.compose.material3.MaterialTheme
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -60,14 +62,16 @@ fun FormIsian(
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            // edit 3 : value, onValueChange, selected, onClick
             OutlinedTextField(
-                value = "",
+                value = txtNama,
                 singleLine = true,
-                modifier = Modifier
-                    .padding(top = 20.dp)
-                    .width(width = 250.dp),
+                shape = MaterialTheme.shapes.medium,
+                modifier = Modifier.width(250.dp).padding(top = 20.dp),
                 label = { Text(text = "Nama Lengkap") },
-                onValueChange = {},
+                onValueChange = {
+                    txtNama = it
+                }
             )
             HorizontalDivider(
                 modifier = Modifier
@@ -75,16 +79,27 @@ fun FormIsian(
                     .width(width = 250.dp), thickness = Thickness, color = Color.Red
             )
             Row {
-                jenisK.forEach { item ->
-                    Row(verticalAlignment = Alignment.CenterVertically) {
+                pilihanJK.forEach { item ->
+                    Row(
+                        modifier = Modifier.selectable(
+                            selected = txtGender == item,
+                            onClick = {
+                                txtGender = item
+                            }
+                        ),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
                         RadioButton(
-                            selected = false,
-                            onClick = { item }
+                            selected = txtGender == item,
+                            onClick = {
+                                txtGender = item
+                            }
                         )
                         Text(text = item)
                     }
                 }
             }
+
             HorizontalDivider(
                 modifier = Modifier
                     .padding(all = 20.dp)
