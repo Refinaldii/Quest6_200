@@ -1,3 +1,8 @@
 package com.example.tugas8.models
 
-data class Siswa()
+import android.R
+
+data class Siswa(
+    val nama : String = "",
+
+)
